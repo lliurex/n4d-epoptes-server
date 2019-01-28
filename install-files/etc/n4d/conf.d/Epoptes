@@ -1,0 +1,7 @@
+[SETUP]
+type=python
+path=EpoptesServer.py
+class=EpoptesVariables
+[METHODS]
+add_group=admin,admins,adm,teachers
+set_group=admin,admins,adm,teachers
