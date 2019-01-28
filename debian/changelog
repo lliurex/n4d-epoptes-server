@@ -1,0 +1,35 @@
+n4d-epoptes-server (0.7) bionic; urgency=medium
+
+  * First bionic release
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Mon, 28 Jan 2019 09:12:13 +0100
+
+n4d-epoptes-server (0.6) xenial; urgency=high
+
+  * Adding new methods to share new n4d variable as EPOPTES_GROUPS
+
+ -- Daniel Duran Vecino <daduve@gmail.com>  Thu, 26 Jan 2017 12:54:23 +0100
+
+n4d-epoptes-server (0.5) xenial; urgency=medium
+
+  * First xenial release 
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 12 Feb 2016 13:01:34 +0100
+
+n4d-epoptes-server (0.3) UNRELEASED; urgency=medium
+
+  * UNRELEASED
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Fri, 10 Oct 2014 14:30:17 +0200
+
+n4d-epoptes-server (0.2) trusty; urgency=medium
+
+  * first trusty release
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Fri, 10 Oct 2014 14:28:31 +0200
+
+n4d-epoptes-server (0.1) precise; urgency=high
+
+  * Initial release.
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Tue, 02 Jul 2013 11:47:36 +0200

@@ -1,0 +1,15 @@
+Source: n4d-epoptes-server
+Section: admin
+Priority: extra
+Maintainer: Equipo LliureX <lliurex@gva.es>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.7
+Homepage: http://www.lliurex.net
+#Vcs-Svn: http://svn.lliurex.net/pandora/n4d-epoptes-server/trunk
+
+Package: n4d-epoptes-server
+Architecture: all
+Pre-depends: n4d
+Depends: ${shlibs:Depends}, ${misc:Depends}, epoptes, iptables
+Description: n4d plugin for epoptes-server
+ n4d plugin to allow epoptes gui access on clients
