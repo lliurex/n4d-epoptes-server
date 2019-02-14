@@ -3,4 +3,4 @@ type=python
 path=EpoptesServer.py
 class=EpoptesServer
 [METHODS]
-(ip)register_ip=adm,admins,teachers
+(ip)register_ip=sudo,admins,teachers
