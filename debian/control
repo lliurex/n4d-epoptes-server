@@ -10,6 +10,6 @@ Homepage: http://www.lliurex.net
 Package: n4d-epoptes-server
 Architecture: all
 Pre-depends: n4d
-Depends: ${shlibs:Depends}, ${misc:Depends}, epoptes, iptables
+Depends: ${shlibs:Depends}, ${misc:Depends}, epoptes, iptables, n4d-epoptes-common
 Description: n4d plugin for epoptes-server
  n4d plugin to allow epoptes gui access on clients
