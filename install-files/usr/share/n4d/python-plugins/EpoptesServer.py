@@ -69,7 +69,7 @@ class EpoptesServer:
 		ret=[]
 		
 		for item in output:
-			if "--dport 10000" in item:
+			if "--dport 10000" in item and "INPUT" in item:
 				ret.append("iptables " + item.replace("-A","-D"))
 		
 		
