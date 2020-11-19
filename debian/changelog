@@ -1,3 +1,10 @@
+n4d-epoptes-server (0.9) bionic; urgency=medium
+
+  * Added n4d-epoptes-common dependency
+  * Fixed iptables rule deletion
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Thu, 19 Nov 2020 11:48:37 +0100
+
 n4d-epoptes-server (0.8) bionic; urgency=medium
 
   * Adding sudo group
