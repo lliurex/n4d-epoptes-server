@@ -1,6 +1,0 @@
-[SETUP]
-type=python
-path=EpoptesServer.py
-class=EpoptesServer
-[METHODS]
-(ip)register_ip=sudo,admins,teachers

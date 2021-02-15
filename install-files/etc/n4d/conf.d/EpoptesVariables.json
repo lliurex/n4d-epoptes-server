@@ -1,0 +1,25 @@
+{
+	"SETUP":{
+		"type":"python",
+		"path":"EpoptesServer.py",
+		"class":"EpoptesVariables"
+	},
+	"METHODS":{
+		"add_group":{
+			"allowed_groups":[
+				"admin",
+				"admins",
+				"sudo",
+				"teachers"
+			]
+		},	
+		"set_group":{
+			"allowed_groups":[
+				"admin",
+				"admins",
+				"sudo",
+				"teachers"
+			]
+		}
+	}
+}	

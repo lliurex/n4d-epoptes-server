@@ -1,0 +1,18 @@
+{
+	"SETUP":{
+		"type":"python",
+		"path":"EpoptesServer.py",
+		"class":"EpoptesServer"
+	},	
+	"METHODS":{
+		"register_ip":{
+			"allowed_groups":[
+				"sudo",
+				"admins",
+				"teachers"
+			],
+			"protected_ip":0
+		}			
+	}
+}
+

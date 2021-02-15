@@ -1,10 +1,14 @@
 import subprocess
 import os
+import n4d.server as n4dcore
+import n4d.responses
 
 class EpoptesVariables:
 
 	
 	def __init__(self):
+
+		self.core=n4dcore.Core.get_core()
 		pass
 		
 	#def __init__
@@ -12,22 +16,30 @@ class EpoptesVariables:
 	def add_group(self,n4d_mode=None):
 		
 		try:
-		
+			'''
 			import xmlrpclib as x
 			c=x.ServerProxy("https://server:9779")
 			VALOR=c.get_variable(n4d_mode,"VariablesManager","EPOPTES_GROUPS")
+			'''
+			VALOR=self.core.get_variable("EPOPTES_GROUPS").get('return',None)
 			#print ("VALOR VARIABLE EPOPTES_GROUPS %s" %VALOR)
 			if  VALOR==None:
-				objects["VariablesManager"].add_variable("EPOPTES_GROUPS",{},"","Epoptes Groups",[],False,False)
+				#Old n4d: objects["VariablesManager"].add_variable("EPOPTES_GROUPS",{},"","Epoptes Groups",[],False,False)
+				self.core.set_variable("EPOPTES_GROUPS",{})
 				#print c.add_variable(n4d_mode,"VariablesManager","EPOPTES_GROUPS",{},"","Epoptes Groups",[],False,False)
 				COMMENT = "[EpoptesVariables] Added variable EPOPTES_GROUPS to VariablesManager"
 				print ("%s" %COMMENT)
-				return [True,str(COMMENT)]
+				#Old n4d:return [True,str(COMMENT)]
+				return n4d.responses.build_successful_call_response('',str(COMMENT))
 			else:
 				COMMENT="[EpoptesVariables] EPOPTES_GROUPS Variable exists in your system, it hasn't been created again"
-				return [True,str(COMMENT)]
+				#Old n4d:return [True,str(COMMENT)]
+				return n4d.responses.build_successful_call_response('',str(COMMENT))
+
 		except Exception as e:
-			return [False,str(e)]
+			#Old n4d: return [False,str(e)]
+			return n4d.responses.build_failed_call_response('',str(e))
+		
 		
 	#def add_group
 	
@@ -35,17 +47,22 @@ class EpoptesVariables:
 	def set_group(self,n4d_mode=None,data=None):
 		
 		try:
-		
+			'''
 			import xmlrpclib as x
 			c=x.ServerProxy("https://server:9779")
 			objects["VariablesManager"].set_variable("EPOPTES_GROUPS",data)
+			'''
+			self.core.set_variable("EPOPTES_GROUP",data)
 			#c.set_variable(n4d_mode,"VariablesManager","EPOPTES_GROUPS",data)
 			COMMENT="[EpoptesVariables] EPOPTES_GROUPS has been updated"
 			print ("%s" %COMMENT)
-			return [True,str(COMMENT)]
+			#Old n4d: return [True,str(COMMENT)]
+			return n4d.responses.build_successful_call_response('',str(COMMENT))
 				
 		except Exception as e:
-			return [False,str(e)]
+			#Old n4d: return [False,str(e)]
+			return n4d.responses.build_failed_call_response('',str(e))
+
 		
 	#def set_group
 	
@@ -64,7 +81,12 @@ class EpoptesServer:
 	def del_epoptes_from_iptables(self):
 		
 		p=subprocess.Popen(["iptables-save"],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-		output=p.communicate()[0].split("\n")
+		output=p.communicate()[0]
+
+		if type(output) is bytes:
+			output=output.decode()
+			
+		output=output.split("\n")
 		
 		ret=[]
 		
@@ -84,7 +106,8 @@ class EpoptesServer:
 		
 		self.allowed_ips.add(ip)
 		self.set_epoptes_in_iptables()
-		return True
+		#Old n4d: return True
+		return n4d.responses.build_successful_call_response()
 		
 	#def register_ip
 	
@@ -111,7 +134,9 @@ class EpoptesServer:
 
 		self.set_drop_epoptes()
 		
-		return True
+		#Old n4d: return True
+		return n4d.responses.build_successful_call_response()
+
 		
 	#def set_iptables
 	
