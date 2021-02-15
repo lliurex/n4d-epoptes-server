@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+case $1 in
+	configure)
+                n4d-modules enable-plugin /etc/n4d/conf.d/Epoptes || true		
+		n4d-modules enable-plugin /etc/n4d/conf.d/EpoptesServer || true		
+
+	;;
+	*)
+		echo "Nothing to do"
+		;;
+esac
+
+#DEBHELPER#
