@@ -1,6 +1,6 @@
 import subprocess
 import os
-import n4d.server as n4dcore
+import n4d.server.core as n4dcore
 import n4d.responses
 
 class EpoptesVariables:
