@@ -52,7 +52,7 @@ class EpoptesVariables:
 			c=x.ServerProxy("https://server:9779")
 			objects["VariablesManager"].set_variable("EPOPTES_GROUPS",data)
 			'''
-			self.core.set_variable("EPOPTES_GROUP",data)
+			self.core.set_variable("EPOPTES_GROUPS",data)
 			#c.set_variable(n4d_mode,"VariablesManager","EPOPTES_GROUPS",data)
 			COMMENT="[EpoptesVariables] EPOPTES_GROUPS has been updated"
 			print ("%s" %COMMENT)
