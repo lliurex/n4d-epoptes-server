@@ -1,3 +1,9 @@
+n4d-epoptes-server (0.19.2) focal; urgency=medium
+
+  * Fixed variable name
+  
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Thu, 25 Mar 2021 13:32:21 +0100
+
 n4d-epoptes-server (0.19.1) focal; urgency=medium
 
   * Fixed import in plugin
