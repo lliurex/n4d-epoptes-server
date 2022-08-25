@@ -2,6 +2,7 @@ import subprocess
 import os
 import n4d.server.core as n4dcore
 import n4d.responses
+import tempfile
 
 class EpoptesVariables:
 
@@ -139,6 +140,29 @@ class EpoptesServer:
 
 		
 	#def set_iptables
+
+
+	def list_iptables (self):
+
+		try:
+			tmp = tempfile.NamedTemporaryFile()
+			file=tmp.name
+			cmd="iptables -L FORWARD | grep DROP | awk '{ print $4 }' > %s"%file
+			os.system(cmd)
+			f = open(file)
+			lines = f.read().splitlines()
+			f.close()
+			return n4d.responses.build_successful_call_response([True,lines])
+				
+		except Exception as e:
+			#Old n4d: return [False,str(e)]
+			if os.path.exists(file):
+				if os.path.isfile(file):
+					os.remove(file)
+			return n4d.responses.build_failed_call_response('',str(e))
+
+
+	#def list_iptables
 	
 	
 #class EpoptesServer
