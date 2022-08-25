@@ -12,6 +12,11 @@
 				"teachers"
 			],
 			"protected_ip":0
+		},
+		"list_iptables":{
+			"allowed_groups":[
+				"anonymous"
+			]
 		}			
 	}
 }
