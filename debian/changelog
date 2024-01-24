@@ -1,3 +1,9 @@
+n4d-epoptes-server (0.19.3.23) jammy; urgency=medium
+
+  * First jammy release
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Wed, 24 Jan 2024 09:49:32 +0100
+
 n4d-epoptes-server (0.19.3) focal; urgency=medium
 
   * New method to list Ip blocked at iptables 
