@@ -3,6 +3,7 @@ import os
 import n4d.server.core as n4dcore
 import n4d.responses
 import tempfile
+import netifaces
 
 class EpoptesVariables:
 
@@ -66,6 +67,21 @@ class EpoptesVariables:
 
 		
 	#def set_group
+
+
+	
+	def release_ip(self,ipserver_netcard,var_epoptes_ip_sever):
+		
+		try:
+			print("Deleting obsolete Ip EpoptesServer: %s"%ipserver_netcard)
+			command="ip addr del %s/24 dev %s"%(ipserver_netcard[0],ipserver_netcard[1])
+			print(command)
+			os.system(command)
+			self.core.set_variable(var_epoptes_ip_sever,None)
+			return n4d.responses.build_successful_call_response(True)
+		except Exception as e:
+			return n4d.responses.build_failed_call_response('',str(e))
+	#def release_ip
 	
 
 
@@ -111,6 +127,60 @@ class EpoptesServer:
 		return n4d.responses.build_successful_call_response()
 		
 	#def register_ip
+
+
+	def set_ip_server(self,ipserver):
+		
+		try:
+			print('Discovering Eth in use.....')
+			eth_used=self.discover_eth()
+			print('ETH_USED: %s'%eth_used)
+			if eth_used!=None:
+				print("Adding new Ip EpoptesServer: %s"%ipserver)
+				command="ip addr add %s/24 dev %s"%(ipserver,eth_used)
+				print(command)
+				os.system(command)
+				return n4d.responses.build_successful_call_response(eth_used)
+			else:
+				return n4d.responses.build_failed_call_response()
+		except Exception as e:
+			return n4d.responses.build_failed_call_response()
+		
+	#def set_ip_server
+
+
+
+	def discover_eth (self):
+		try:
+			x=netifaces.interfaces()
+			netcard_used=None
+			print(x)
+			for i in x:
+				if i != 'lo':
+					print('testing %s'%i)
+					try:
+						ip = netifaces.ifaddresses(i)[netifaces.AF_INET][0]['addr']
+						print('IP addr: {0} '.format(ip))
+						netcard_used=i
+						print('Netcard in use: %s'%netcard_used)
+					except KeyError:
+						print('NO IP')
+						continue
+			return netcard_used
+		except Exception as e:
+			print('Exception discover_eth %s'%e)
+			return n4d.responses.build_failed_call_response('',str(e))
+	#def_discover_eth
+
+
+
+	def ip_free(self,ipserver):
+		
+		return n4d.responses.build_successful_call_response(True)
+		
+	#def ip_free
+
+	
 	
 	def set_drop_epoptes(self):
 		
