@@ -74,11 +74,15 @@ class EpoptesVariables:
 		
 		try:
 			print("Deleting obsolete Ip EpoptesServer: %s"%ipserver_netcard)
-			command="ip addr del %s/24 dev %s"%(ipserver_netcard[0],ipserver_netcard[1])
+			#command="ip addr del %s/24 dev %s"%(ipserver_netcard[0],ipserver_netcard[1])
+			command="natfree-iface unset"
 			print(command)
-			os.system(command)
-			self.core.set_variable(var_epoptes_ip_sever,None)
-			return n4d.responses.build_successful_call_response(True)
+			t=os.system(command)
+			if t=="0":
+				self.core.set_variable(var_epoptes_ip_sever,None)
+				return n4d.responses.build_successful_call_response(True)
+			else:
+				return n4d.responses.build_successful_call_response(False)
 		except Exception as e:
 			return n4d.responses.build_failed_call_response('',str(e))
 	#def release_ip
@@ -88,13 +92,14 @@ class EpoptesVariables:
 class EpoptesServer:
 	
 	def __init__(self):
-		
-		self.allowed_ips=set()
-		self.del_epoptes_from_iptables()
-		self.set_drop_epoptes()
+		pass
+		#self.allowed_ips=set()
+		#self.del_epoptes_from_iptables()
+		#self.set_drop_epoptes()
 		
 	#def init
 	
+	'''
 	def del_epoptes_from_iptables(self):
 		
 		p=subprocess.Popen(["iptables-save"],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -118,7 +123,9 @@ class EpoptesServer:
 		
 		
 	#def parse_iptables
+	'''
 	
+	'''
 	def register_ip(self,ip):
 		
 		self.allowed_ips.add(ip)
@@ -127,11 +134,13 @@ class EpoptesServer:
 		return n4d.responses.build_successful_call_response()
 		
 	#def register_ip
+	'''
 
 
 	def set_ip_server(self,ipserver):
 		
 		try:
+			'''
 			print('Discovering Eth in use.....')
 			eth_used=self.discover_eth()
 			print('ETH_USED: %s'%eth_used)
@@ -143,6 +152,17 @@ class EpoptesServer:
 				return n4d.responses.build_successful_call_response(eth_used)
 			else:
 				return n4d.responses.build_failed_call_response()
+		except Exception as e:
+			return n4d.responses.build_failed_call_response()
+			'''
+
+			print('Adding Ip/mask to Virtual ETH')
+			command="natfree-iface set %s"%(ipserver)
+			t=os.system(command)
+			if t=="0":
+				return n4d.responses.build_successful_call_response(True)
+			else:
+				return n4d.responses.build_successful_call_response(False)
 		except Exception as e:
 			return n4d.responses.build_failed_call_response()
 		
@@ -182,16 +202,17 @@ class EpoptesServer:
 
 	
 	
-	def set_drop_epoptes(self):
+	'''def set_drop_epoptes(self):
 		
 		cmd="iptables -A INPUT -p tcp --dport 10000 -j DROP"
 		#print(cmd)
 		os.system(cmd)
 		
-	#
+	#def_ip_free
+	'''
 	
 	
-	def set_epoptes_in_iptables(self):
+	'''def set_epoptes_in_iptables(self):
 		
 		self.del_epoptes_from_iptables()
 			
@@ -209,10 +230,10 @@ class EpoptesServer:
 		return n4d.responses.build_successful_call_response()
 
 		
-	#def set_iptables
+	#def set_iptables'''
 
 
-	def list_iptables (self):
+	'''def list_iptables (self):
 
 		try:
 			tmp = tempfile.NamedTemporaryFile()
@@ -232,7 +253,7 @@ class EpoptesServer:
 			return n4d.responses.build_failed_call_response('',str(e))
 
 
-	#def list_iptables
+	#def list_iptables'''
 	
 	
 #class EpoptesServer
