@@ -76,14 +76,18 @@ class EpoptesVariables:
 			print("Deleting obsolete Ip EpoptesServer: %s"%ipserver_netcard)
 			#command="ip addr del %s/24 dev %s"%(ipserver_netcard[0],ipserver_netcard[1])
 			command="natfree-iface unset"
-			print(command)
-			t=os.system(command)
-			if t=="0":
+			#print(command)
+			#t=os.system(command)
+			result = subprocess.Popen(command, shell=True)
+			output=result.wait()
+			#print(output)
+			if output==0:
 				self.core.set_variable(var_epoptes_ip_sever,None)
 				return n4d.responses.build_successful_call_response(True)
 			else:
 				return n4d.responses.build_successful_call_response(False)
 		except Exception as e:
+			print(e)
 			return n4d.responses.build_failed_call_response('',str(e))
 	#def release_ip
 	
