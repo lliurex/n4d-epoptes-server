@@ -121,7 +121,7 @@ class EpoptesServer:
 		
 		try:
 			print('Adding Ip/mask to Virtual ETH')
-			command="natfree-server configure %s"%(index)
+			command="natfree-server CONFIGURE %s"%(index)
 			t=os.system(command)
 			if t=="0":
 				return n4d.responses.build_successful_call_response(True)
