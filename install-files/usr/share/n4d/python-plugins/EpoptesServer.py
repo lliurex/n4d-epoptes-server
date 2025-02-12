@@ -66,31 +66,7 @@ class EpoptesVariables:
 			return n4d.responses.build_failed_call_response('',str(e))
 
 		
-	#def set_group
-
-
-	
-	def release_ip(self,ipserver_netcard,var_epoptes_ip_sever):
-		
-		try:
-			print("Deleting obsolete Ip EpoptesServer: %s"%ipserver_netcard)
-			#command="ip addr del %s/24 dev %s"%(ipserver_netcard[0],ipserver_netcard[1])
-			command="natfree-iface unset"
-			#print(command)
-			#t=os.system(command)
-			result = subprocess.Popen(command, shell=True)
-			output=result.wait()
-			#print(output)
-			if output==0:
-				self.core.set_variable(var_epoptes_ip_sever,None)
-				return n4d.responses.build_successful_call_response(True)
-			else:
-				return n4d.responses.build_successful_call_response(False)
-		except Exception as e:
-			print(e)
-			return n4d.responses.build_failed_call_response('',str(e))
-	#def release_ip
-	
+	#def set_group	
 
 
 class EpoptesServer:
@@ -141,27 +117,11 @@ class EpoptesServer:
 	'''
 
 
-	def set_ip_server(self,ipserver):
+	def set_ip_server(self,index):
 		
 		try:
-			'''
-			print('Discovering Eth in use.....')
-			eth_used=self.discover_eth()
-			print('ETH_USED: %s'%eth_used)
-			if eth_used!=None:
-				print("Adding new Ip EpoptesServer: %s"%ipserver)
-				command="ip addr add %s/24 dev %s"%(ipserver,eth_used)
-				print(command)
-				os.system(command)
-				return n4d.responses.build_successful_call_response(eth_used)
-			else:
-				return n4d.responses.build_failed_call_response()
-		except Exception as e:
-			return n4d.responses.build_failed_call_response()
-			'''
-
 			print('Adding Ip/mask to Virtual ETH')
-			command="natfree-iface set %s"%(ipserver)
+			command="natfree-server configure %s"%(index)
 			t=os.system(command)
 			if t=="0":
 				return n4d.responses.build_successful_call_response(True)
