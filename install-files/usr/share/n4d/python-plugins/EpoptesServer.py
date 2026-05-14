@@ -3,7 +3,6 @@ import os
 import n4d.server.core as n4dcore
 import n4d.responses
 import tempfile
-import netifaces
 
 class EpoptesVariables:
 
@@ -66,20 +65,20 @@ class EpoptesVariables:
 			return n4d.responses.build_failed_call_response('',str(e))
 
 		
-	#def set_group	
+	#def set_group
+	
 
 
 class EpoptesServer:
 	
 	def __init__(self):
-		pass
-		#self.allowed_ips=set()
-		#self.del_epoptes_from_iptables()
-		#self.set_drop_epoptes()
+		
+		self.allowed_ips=set()
+		self.del_epoptes_from_iptables()
+		self.set_drop_epoptes()
 		
 	#def init
 	
-	'''
 	def del_epoptes_from_iptables(self):
 		
 		p=subprocess.Popen(["iptables-save"],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -103,9 +102,7 @@ class EpoptesServer:
 		
 		
 	#def parse_iptables
-	'''
 	
-	'''
 	def register_ip(self,ip):
 		
 		self.allowed_ips.add(ip)
@@ -114,69 +111,17 @@ class EpoptesServer:
 		return n4d.responses.build_successful_call_response()
 		
 	#def register_ip
-	'''
-
-
-	def set_ip_server(self,index):
-		
-		try:
-			print('Adding Ip/mask to Virtual ETH')
-			command="natfree-server CONFIGURE %s"%(index)
-			t=os.system(command)
-			if t=="0":
-				return n4d.responses.build_successful_call_response(True)
-			else:
-				return n4d.responses.build_successful_call_response(False)
-		except Exception as e:
-			return n4d.responses.build_failed_call_response()
-		
-	#def set_ip_server
-
-
-
-	def discover_eth (self):
-		try:
-			x=netifaces.interfaces()
-			netcard_used=None
-			print(x)
-			for i in x:
-				if i != 'lo':
-					print('testing %s'%i)
-					try:
-						ip = netifaces.ifaddresses(i)[netifaces.AF_INET][0]['addr']
-						print('IP addr: {0} '.format(ip))
-						netcard_used=i
-						print('Netcard in use: %s'%netcard_used)
-					except KeyError:
-						print('NO IP')
-						continue
-			return netcard_used
-		except Exception as e:
-			print('Exception discover_eth %s'%e)
-			return n4d.responses.build_failed_call_response('',str(e))
-	#def_discover_eth
-
-
-
-	def ip_free(self,ipserver):
-		
-		return n4d.responses.build_successful_call_response(True)
-		
-	#def ip_free
-
 	
-	
-	'''def set_drop_epoptes(self):
+	def set_drop_epoptes(self):
 		
 		cmd="iptables -A INPUT -p tcp --dport 10000 -j DROP"
 		#print(cmd)
 		os.system(cmd)
 		
-	#def_ip_free
-	'''
+	#
 	
 	
-	'''def set_epoptes_in_iptables(self):
+	def set_epoptes_in_iptables(self):
 		
 		self.del_epoptes_from_iptables()
 			
@@ -194,10 +139,10 @@ class EpoptesServer:
 		return n4d.responses.build_successful_call_response()
 
 		
-	#def set_iptables'''
+	#def set_iptables
 
 
-	'''def list_iptables (self):
+	def list_iptables (self):
 
 		try:
 			tmp = tempfile.NamedTemporaryFile()
@@ -217,7 +162,7 @@ class EpoptesServer:
 			return n4d.responses.build_failed_call_response('',str(e))
 
 
-	#def list_iptables'''
+	#def list_iptables
 	
 	
 #class EpoptesServer
